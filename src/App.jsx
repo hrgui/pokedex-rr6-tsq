@@ -1,9 +1,10 @@
-import { RouterProvider, createHashRouter, Outlet, redirect } from "react-router-dom";
+import { RouterProvider, createHashRouter, redirect } from "react-router-dom";
 import "./App.css";
 import ErrorPage from "./error-page";
 import { Pokemon } from "./Pokemon";
 import { pokemonLoader } from "./PokemonLoader";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Root } from "./Root";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,7 +17,7 @@ const queryClient = new QueryClient({
 const router = createHashRouter([
   {
     path: "/",
-    element: <Outlet />,
+    element: <Root />,
     errorElement: <ErrorPage />,
     loader: ({ params }) => {
       if (!params.pokemon) {
