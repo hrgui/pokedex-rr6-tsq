@@ -4,23 +4,29 @@ import { Link } from "react-router-dom";
 
 export function PokemonView({ name, img, id }) {
   return (
-    <div>
-      <img src={img} />
-      <h1>
+    <div className="flex flex-col justify-center items-center">
+      <img src={img} className="w-80 h-80" />
+      <h1 className="text-4xl font-semibold mb-2">
         #{id} {name}
       </h1>
     </div>
   );
 }
 
-export function PokemonNav({ id }) {
+export function PokemonNav({ id, children }) {
   const prev = id - 1;
   const next = id + 1;
   return (
-    <div style={{ gap: "16px", display: "flex", justifyContent: "center", fontSize: "36px" }}>
-      {prev > 0 && <Link to={`/${prev}`}>&laquo;</Link>}
-      {id}
-      <Link to={`/${next}`}>&raquo;</Link>
+    <div className="text-3xl flex gap-2 justify-center items-center w-full">
+      {prev > 0 && (
+        <Link className="text-blue-500" to={`/${prev}`}>
+          &laquo;
+        </Link>
+      )}
+      {children}
+      <Link to={`/${next}`} className="text-blue-500">
+        &raquo;
+      </Link>
     </div>
   );
 }
@@ -28,9 +34,12 @@ export function PokemonNav({ id }) {
 export function Pokemon() {
   const { pokemon } = useLoaderData();
   return (
-    <>
-      <PokemonView name={pokemon.name} id={pokemon.id} img={pokemon.sprites.front_default} />
-      <PokemonNav id={pokemon.id} />
-    </>
+    <div className="absolute w-full h-full flex items-center justify-center">
+      <div>
+        <PokemonNav id={pokemon.id}>
+          <PokemonView name={pokemon.name} id={pokemon.id} img={pokemon.sprites.front_default} />
+        </PokemonNav>
+      </div>
+    </div>
   );
 }

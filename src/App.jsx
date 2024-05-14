@@ -1,5 +1,4 @@
 import { RouterProvider, createHashRouter, redirect } from "react-router-dom";
-import "./App.css";
 import ErrorPage from "./error-page";
 import { Pokemon } from "./Pokemon";
 import { pokemonLoader } from "./PokemonLoader";
